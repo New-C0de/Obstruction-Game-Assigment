@@ -17,7 +17,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
+        rb.linearVelocity = new Vector3(
+            moveSpeed,
+            rb.linearVelocity.y,
+            rb.linearVelocity.z
+        );
 
         if (Keyboard.current.spaceKey.wasPressedThisFrame && isGrounded)
         {

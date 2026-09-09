@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float jumpForce = 7f;
+    [SerializeField] private GameObject winText;
 
     private Rigidbody rb;
     private bool isGrounded = true;
@@ -40,12 +41,17 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Collided with: " + collision.gameObject.name);
-
         if (collision.gameObject.CompareTag("Obstacle"))
         {
             Debug.Log("Obstacle hit!");
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        if (collision.gameObject.CompareTag("Finish"))
+        {
+            Debug.Log("You Win!");
+            moveSpeed = 0f;
+            winText.SetActive(true);
         }
     }
 }
